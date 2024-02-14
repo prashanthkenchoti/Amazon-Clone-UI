@@ -22,13 +22,17 @@ const Header = () => {
       {/* Link block */}
       <div className='flex items-center space-x-4'>
         {/* Login */}
-        <Link to={"/"} className='text-white'>Login</Link>
+        <Link to={"/login"} className='text-white   hover:bg-blue-600 '>Login</Link>
 
         {/* Become a seller option */}
-        <Link to={"/"} className='text-white'>Become a Seller</Link>
+        <Link to={"/seller/register"} className='text-white'>Become a Seller</Link>
+
+         {/* Become a new option */}
+         <Link to={"/"} className='text-white'>New Customer?Signup</Link>
+
 
         {/* Cart */}
-        <Link to={"/"} className='text-white'>Cart</Link>
+        <Link to={"/cart"} className='text-white'>Cart</Link>
       </div>
     </header>
   );
