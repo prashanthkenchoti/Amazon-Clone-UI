@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
-    <header className='bg-gray-700 h-16 flex justify-between items-center px-4'>
+    <header className='bg-gray-700 h-16 flex justify-between items-center px-4 relative'>
       {/* Logo */}
       <Link to="/" className='flex items-center'>
         <img src="/amazon logo.PNG" alt="Amazon Logo" className='h-16 w-38 mr-2' />
@@ -22,17 +22,17 @@ const Header = () => {
       {/* Link block */}
       <div className='flex items-center space-x-4'>
         {/* Login */}
-        <Link to={"/login"} className='text-white   hover:bg-blue-600 '>Login</Link>
+        <Link to={"/login"} className='text-white   font-semibold '>Login</Link>
 
         {/* Become a seller option */}
-        <Link to={"/seller/register"} className='text-white'>Become a Seller</Link>
+        <Link to={"/seller/register"} className='text-white font-semibold'>Become a Seller</Link>
 
          {/* Become a new option */}
-         <Link to={"/"} className='text-white'>New Customer?Signup</Link>
+         <Link to={"/customer/register"} className='text-white font-semibold'>New Customer?Signup</Link>
 
 
         {/* Cart */}
-        <Link to={"/cart"} className='text-white'>Cart</Link>
+        <Link to={"/cart"} className='text-white font-semibold'>Cart</Link>
       </div>
     </header>
   );
