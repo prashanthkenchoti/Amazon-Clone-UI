@@ -1,25 +1,61 @@
 
-  import React, { useState } from 'react'
+  import axios from 'axios';
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
   
-    const Register=(role) =>{
+    const Register=({role}) =>{
       const[username,setUsername]=useState("");
       const[password,setPassword]=useState("");
+      const navigate=useNavigate();// as soon as we click on submit button it will redirect to the otp page
 
-      const respond=(event) =>{
+      const valueEmail=sessionStorage.setItem("email",username);
+      // if(valueEmail==null);
+      // {
+      //   navigate("/");
+      // }
+
+      const handleRegistration= async(event) =>{
         event.preventDefault();
-        console.log(username);
-        console.log(password);
-        console.log(role);
+        // axios -> helps to send the cross origin requests.command to install the axios using terminal "npm install axios"
+        //fire request  to the server using axios
+        
+        const URL="http://localhost:8080/api/v1/register";
+      const body={
+                email:username,
+                password:password,
+                userRole:role
+              } 
+
+              console.log(username);
+              console.log(password);
+              console.log(role);
+
+
+              const header={
+                headers:{
+                  "Content-Type":"application/json",
+                },
+                withCredentials:true
+              }
+
+              try {
+                const response = await axios.post(URL,body,header);
+                console.log(response);
+               // sessionStorage.setItem("email",email);
+                navigate("/verify-otp")// as soon as we click on submit button it will redirect to the otp page
+              } catch (error) {
+                console.log(error);
+              }
+        
       }
   
     return (
-      
-
+     <form> 
 <div className="flex justify-center items-center h-screen bg-gray-200">
-      <div className="bg-pink-400 p-16 w-96 rounded-3xl shadow-md">
+      <div className="bg-white p-16 w-96 rounded-3xl shadow-md">
         <h2 className="text-3xl font-bold mb-4 text-center">User Registration</h2>
         <div className="mb-4">
-          <label htmlFor="username" className="block text-gray-700">Username</label>
+          <label htmlFor="username" className="block text-gray-700 font-bold">Username</label>
           <input
             type="text"
             id="username"
@@ -29,7 +65,7 @@
           />
         </div>
         <div className="mb-6">
-          <label htmlFor="password" className="block text-gray-700">Password</label>
+          <label htmlFor="password" className="block text-gray-700 font-bold">Password</label>
           <input
             type="password"
             id="password"
@@ -38,11 +74,14 @@
             className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
           />
         </div>
-        <button className="w-full bg-white to-green-600ext-white font-bold py-2 rounded-lg hover:bg-indigo-700 focus:outline-none focus:bg-indigo-700">
+        <button 
+        onClick={handleRegistration}
+        className="w-full bg-indigo-500 text-white font-bold py-2 rounded-lg hover:bg-indigo-700 focus:outline-none focus:bg-indigo-700">
           Register
         </button>
       </div>
     </div>
+    </form>
       
     )
   }
@@ -58,20 +97,3 @@
 
 
 
-{/* <div>
-       <input
-          type='text'
-          placeholder='enter your password'
-          onChange={(event) => setUsername(event.target.value)}
-          className='px-2 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 w-70 ml-40' // Added 'w-full' to make the input full width
-        />
-
-<input
-          type='text'
-          placeholder='enter your password'
-          onChange={(event) => setPassword(event.target.value)}
-          className='px-2 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 w-70 ml-40' // Added 'w-full' to make the input full width
-        />
-
-        <button onClick={respond}></button>
-    </div> */}
