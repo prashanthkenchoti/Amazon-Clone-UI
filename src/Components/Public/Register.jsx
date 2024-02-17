@@ -2,6 +2,7 @@
   import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+
   
     const Register=({role}) =>{
       const[username,setUsername]=useState("");
@@ -31,18 +32,19 @@ import { useNavigate } from 'react-router-dom';
               console.log(role);
 
 
-              const header={
+              const config={
                 headers:{
                   "Content-Type":"application/json",
                 },
-                withCredentials:true
+                withCredentials:true,
               }
 
               try {
-                const response = await axios.post(URL,body,header);
+                const response = await axios.post(URL,body,config);
                 console.log(response);
-               sessionStorage.setItem("email",email);
+               sessionStorage.setItem("email",username);
                 navigate("/verify-otp")// as soon as we click on submit button it will redirect to the otp page
+                //sessionStorage.removeItem(email);
               } catch (error) {
                 console.log(error);
               }

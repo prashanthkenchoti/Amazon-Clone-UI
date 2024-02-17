@@ -9,7 +9,7 @@ const VerifyOTP = () => {
   const handleOTP= async(event) =>{
     event.preventDefault();
 
-    const URL="http://localhost:8080/api/v1/varify-otp";
+    const URL="http://localhost:8080/api/v1/verify-otp";
     const body={
       email:sessionStorage.getItem('email'),
      otp:otp
@@ -24,8 +24,8 @@ const VerifyOTP = () => {
     try {
       const otpResponse = await axios.post(URL,body,header);
       console.log(otpResponse);
-     // sessionStorage.setItem("email",email);
-      //navigate("/verify-otp")// as soon as we click on submit button it will redirect to the otp page
+      sessionStorage.setItem("email",email);
+      navigate("/verify-otp")// as soon as we click on submit button it will redirect to the otp page
     } catch (error) {
       console.log(error);
     }

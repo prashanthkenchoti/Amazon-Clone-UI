@@ -1,27 +1,27 @@
-import React, { createContext, useContext, useState } from 'react'
-import AllRoutes from '../Routes/AllRoutes'
+import React, { createContext, useContext, useState } from "react";
+import AllRoutes from "../Routes/AllRoutes";
 
-const authContext=createContext({child})// creation of context
+const authContext = createContext({}); // creation of context
 
-const AuthProvider = () => {
-    const routes = AllRoutes();
-    const[suth,setAuth]=useState({
-        userId:"",
-        username:"",
-        role:"CUSTOMER",
-        isAuthenticated:false,
-        accessExpiration:"",
-        refreshExpiration:""
-    })
+const AuthProvider = ({ children }) => {
+  const routes = AllRoutes();
+  const [auth, setAuth] = useState({
+    userId: "",
+    username: "",
+    role: "CUSTOMER",
+    isAuthenticated: false,
+    accessExpiration: "",
+    refreshExpiration: "",
+  });
   return (
-    <authContext.Provider value={{Auth,setAuth}}>
-        {routes}
+    <authContext.Provider value={{ auth, setAuth }}>
+      {children}
     </authContext.Provider>
-  )
-}
+  );
+};
 
-export default AuthProvider
+export default AuthProvider;
 
 // creating custom hook
 
-export const useAuth=() =>useContext(authContext);
+export const useAuth = () => useContext(authContext);
