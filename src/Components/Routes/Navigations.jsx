@@ -1,6 +1,5 @@
 import React from 'react'
 import Register from '../Public/Register';
-import Login from '../Public/Login';
 import VerifyOTP from '../Public/VerifyOTP';
 import Search from '../Public/Search';
 import Home from '../Public/Home';
@@ -13,6 +12,7 @@ import EditProfile from '../Private/Common/EditProfile';
 import Account from '../Private/Common/Account';
 import Header from '../Util/Header';
 import Footer from '../Util/Footer';
+import Login from "../Public/Login";
 
 
 //================================BEFORE AUTH=============================

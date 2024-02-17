@@ -41,7 +41,7 @@ import { useNavigate } from 'react-router-dom';
               try {
                 const response = await axios.post(URL,body,header);
                 console.log(response);
-               // sessionStorage.setItem("email",email);
+               sessionStorage.setItem("email",email);
                 navigate("/verify-otp")// as soon as we click on submit button it will redirect to the otp page
               } catch (error) {
                 console.log(error);

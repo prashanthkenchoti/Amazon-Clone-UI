@@ -22,7 +22,7 @@ const Header = () => {
       {/* Link block */}
       <div className='flex items-center space-x-4'>
         {/* Login */}
-        <Link to={"/login"} className='text-white   font-semibold '>Login</Link>
+        <Link to={"/login-user"} className='text-white   font-semibold '>Login</Link>
 
         {/* Become a seller option */}
         <Link to={"/seller/register"} className='text-white font-semibold'>Become a Seller</Link>

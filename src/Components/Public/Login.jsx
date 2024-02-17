@@ -1,8 +1,57 @@
-
-import React from 'react';
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../Context/AuthProvider';
+import axios from 'axios';
 
 const Login = () => {
-  return (
+    const[username,setUsername]=useState("");
+    const[password,setPassword]=useState("");
+    const navigate=useNavigate();
+    const {auth,setAuth}=useAuth();
+
+    const handleLogin =async(e) =>{
+        const URL="http://localhost:8080/api/v1/login";
+      const body={
+                email:username,
+                password:password,
+                userRole:role
+              };
+
+              console.log(username);
+              console.log(password);
+
+              const header={
+                headers:{
+                  "Content-Type":"application/json",
+                }
+                
+              }
+
+              try {
+                const loginresponse = await axios.post(URL,body,header);
+                console.log(hello);
+                if(loginresponse.status===200)
+                {
+                    console.log(loginresponse);
+                }
+                const user= {
+                    userId:loginresponse.data.data.userId,
+                    username:loginresponse.data.data.username,
+                    role:loginresponse.data.data.role,
+                    isAuthenticated:loginresponse.data.dataauthenticated,
+                    accessExpiration:loginresponse.data.data.accessExpiration,
+                    refreshExpiration:loginresponse.data.data.refreshExpiration
+                }
+               sessionStorage.setItem("email",email);
+               setAuth(user);
+               console.log(auth);
+                navigate("/verify-otp")// as soon as we click on submit button it will redirect to the otp page
+              } catch (error) {
+                console.log(error);
+              }
+    };
+
+   return (
     <form>
     <div className="flex justify-center items-center h-screen bg-gray-200">
       <div className="bg-white p-16 w-96 rounded-3xl shadow-md">
@@ -14,6 +63,7 @@ const Login = () => {
             type="text"
             id="username"
             placeholder="Enter your Username"
+            onChange={(event) => setUsername(event.target.value)}
             className="w-full  px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
           />
         </div>
@@ -23,17 +73,17 @@ const Login = () => {
             type="password"
             id="password"
             placeholder="Enter your password"
+            onChange={(event) => setPassword(event.target.value)}
             className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
           />
         </div>
-        <button className="w-full bg-indigo-500 text-white font-bold py-2 rounded-lg hover:bg-indigo-700 focus:outline-none focus:bg-indigo-700">
+        <button onClick={handleRegistration} className=" w-full bg-indigo-500 text-white font-bold py-2 rounded-lg hover:bg-indigo-700 focus:outline-none focus:bg-indigo-700">
           Login
         </button>
       </div>
     </div>
     </form>
-  );
+   )
 }
 
-export default Login;
-
+export default Login
